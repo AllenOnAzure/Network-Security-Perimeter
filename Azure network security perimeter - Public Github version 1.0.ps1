@@ -1,7 +1,7 @@
 #Azure network security perimeter - Public Github version 1.0#
 
 
-######Step 1 - Optional -Install the Az.Tools.Installer module:
+######Step 1 - Install the Az.Tools.Installer module:
 Install-Module -Name Az.Tools.Installer -Repository PSGallery -Force
 
 
@@ -26,7 +26,7 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Network
 ######Step 6 - Create a resource group and key vault
 # Create a resource group
 $rgParams = @{
-    Name = "allen-nspdemo-rg"
+    Name = "allen-lab-rg"
     Location = "southafricanorth"
 }
 New-AzResourceGroup @rgParams
@@ -97,9 +97,12 @@ New-AzNetworkSecurityPerimeterAssociation @nspassociation | format-list
 	
 
 ######Step 12 - Create, update network security perimeter access rules
-<##NOTE: If managed identity is not assigned to the resource which supports it, 
+
+<#
+NOTE FOR PAAS RESOURCES: If managed identity is not assigned to the resource which supports it, 
 outbound access to other resources within the same perimeter will be denied. 
-Subscription based inbound rules intended to allow access from this resource will not take effect.#>
+Subscription based inbound rules intended to allow access from this resource will not take effect.
+#>
 
 # Create an inbound access rule for a public IP address prefix
     $inboundRule = @{ 
